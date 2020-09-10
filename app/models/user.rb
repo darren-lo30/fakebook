@@ -3,14 +3,21 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
 
-  #setting up friends
-  has_many :friendships
-  has_many :friends, through: :friendships
-  has_many :inverse_friendships, foreign_key: :friend_id, class_name: "Friendship"
-  has_many :inverse_friends, through: :inverse_friendships, source: :user
+  validates :first_name, :last_name, :username, presence: true
+  validates :username, uniqueness: true
 
-  def all_friends
-    friends.or(inverse_friends)
+  #Setting up friend relations
+  #Friends where the user requested to be friends with
+  has_many :friendships, dependent: :destroy
+  has_many :user_requested_friends, through: :friendships, source: :friend
+
+  #Friends where the friend requested to be friends with the user
+  has_many :inverse_friendships, foreign_key: :friend_id, class_name: "Friendship", dependent: :destroy
+  has_many :friend_requested_friends, through: :inverse_friendships, source: :user
+
+  def friends
+    user_requested_friends + friend_requested_friends
   end
 end
