@@ -16,6 +16,9 @@ class User < ApplicationRecord
   #Friends where the friend requested to be friends with the user
   has_many :inverse_friendships, foreign_key: :friend_id, class_name: "Friendship", dependent: :destroy
   has_many :friend_requested_friends, through: :inverse_friendships, source: :user
+  
+  #Posts
+  has_many :posts, foreign_key: "poster_id"
 
   def friends
     user_requested_friends + friend_requested_friends
