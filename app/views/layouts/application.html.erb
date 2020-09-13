@@ -9,7 +9,14 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="bg-main">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+            <%= link_to "Fakebook", root_path, class: "navbar-brand"%>
+        </div>
+    </nav>
+    
+    </nav>
     <%= yield %>
   </body>
 </html>
