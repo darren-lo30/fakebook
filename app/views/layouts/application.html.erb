@@ -10,9 +10,23 @@
   </head>
 
   <body class="bg-main">
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <%= link_to "Fakebook", root_path, class: "navbar-brand"%>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navLinks" aria-controls="navbarLinks" aria-expanded="false" aria-label="Navigation toggler">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navLinks">
+                <ul class="navbar-nav ml-auto">
+                    <% if user_signed_in? %>
+                        <li><%= link_to "View Profile", user_path(current_user), class: "btn" %></li>
+                        <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn" %></li>
+                    <% else %>
+                        <li><%=link_to "Sign In", new_user_session_path, class: "btn bg-primary-lighter text-main" %></li>
+                        <li><%=link_to "Sign Up", new_user_registration_path, class: "btn bg-primary text-light" %></li>
+                    <% end %>
+                </ul>
+            </div>
         </div>
     </nav>
     

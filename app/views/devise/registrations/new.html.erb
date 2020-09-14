@@ -1,7 +1,7 @@
-<div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-7 d-flex align-items-center">
-            <div class='w-100 mr-3 text-light'>
+<div class="container main-content">
+    <div class="row justify-content-center">
+        <div class="col-7">
+            <div class="w-100 mr-3 text-light side-label">
                 <h1>Make A Fakebook Account</h1>
                 <hr class="my-4 bg-light">
                 <p>Make a fakebook account to get make new friends and view the posts of countless users.</p>
@@ -45,7 +45,7 @@
                             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"%>
                         </div>
 
-                        <div class="actions">
+                        <div class="actions text-center">
                             <%= f.submit "Sign up", class: "btn bg-main text-light"%>
                         </div>
                     <% end %>

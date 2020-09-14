@@ -4,12 +4,32 @@ body {
     min-width: 400px;
 }
 
+.main-content {
+    margin-top: 5%;
+}
+
 .bg-main {
     background-color:#355C7D;
+}
+
+.text-main {
+    color: #355C7D;
 }
 
 .link-muted {
     a {
         color: #6c757d;
     }
+}
+
+.side-label {
+    margin-top: 20%;
+}
+
+.navbar li {
+    margin-left: 1.5rem;
+}
+
+.bg-primary-lighter {
+    background-color: rgba(0, 123, 255, 0.2);
 }
