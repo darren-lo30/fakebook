@@ -1,0 +1,22 @@
+<div class="list-group-item">
+    <div class="media">
+        <img src="https://bulma.io/images/placeholders/64x64.png" class="mr-3">
+        <div class="media-body">
+            <h3><%= friend.first_name %></h3>
+        </div>
+        
+        <% if status == "pending-incoming" %>
+            <%= link_to "Accept", friendship_path(FriendRequest.find_by(requester_id: friend.id, requestee_id: current_user.id), status: :accepted), 
+                        method: :patch, class: "btn btn-success"%>
+            <%= link_to "Decline", friendship_path(FriendRequest.find_by(requester_id: friend.id, requestee_id: current_user.id), status: :declined), 
+                        method: :patch, class: "btn btn-danger ml-1"%>
+        <% elsif status == "pending-outgoing" %>
+            <%= link_to "Cancel", friendship_path(FriendRequest.find_by(requester_id: current_user.id, requestee_id: friend.id), status: :cancelled), 
+                        method: :patch, class: "btn btn-danger" %>
+        <% else %>
+            <%= link_to "View Profile", user_path(friend), class: "btn btn-primary" %>
+            <%= link_to "Remove", friendship_path(Friendship.find_friendship(current_user, friend), friend_id: friend.id ), 
+                        method: :delete, class: "btn btn-danger ml-1" %>
+        <% end %>
+    </div>
+</div>

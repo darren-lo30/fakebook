@@ -1,0 +1,43 @@
+
+<div class="card">
+    <div class="card-header">
+        <%= form_with url: user_friendships_path(current_user), method: :post do %>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                </div>
+                <%= text_field_tag :friend_username, nil, class: "form-control", placeholder: "Add a friend using their username", required: true %>
+                <div class="input-group-append">
+                    <%= submit_tag "Add Friend", class: "btn btn-primary" %>
+                </div>
+            </div>
+        <% end%>
+    </div>
+
+    <div class="list-group-flush">
+        <div class="list-group-item">
+            <ul class="nav nav-tabs" id="friendOptions" role="tablist">
+                <li class="nav-item">
+                    <%= link_to "Friends", "#friends", class: "nav-link active", data: {toggle: "tab"} %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to "Incoming Requests", "#pending-incoming-friends", class: "nav-link", data: {toggle: "tab"} %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to "Outgoing Requests", "#pending-outgoing-friends", class: "nav-link", data: {toggle: "tab"} %>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane show active fade" id="friends">            
+                <%= render partial: "friend", collection: @friends, locals: {status: "accepted"} %>
+            </div>
+            <div class="tab-pane fade" id="pending-incoming-friends">
+                <%= render partial: "friend", collection: @pending_incoming_friends, locals: {status: "pending-incoming"}%>
+            </div>
+            <div class="tab-pane fade" id="pending-outgoing-friends">
+                <%= render partial: "friend", collection: @pending_outgoing_friends, locals: {status: "pending-outgoing"} %>
+            </div>
+        </div>
+    </div>
+</div>
