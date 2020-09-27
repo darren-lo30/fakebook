@@ -12,16 +12,18 @@ class FriendshipsController < ApplicationController
 
   #Send a friend request
   def create
+    friend_to_add = User.find_by(username: params[:friend_username])
     unless friend_to_add.nil? 
       friend_request = current_user.sent_friend_requests.build(requestee_id: friend_to_add.id)
       if friend_request.save
         flash[:succes] = "Succesfully added @#{friend.username} as a friend!"
       else
-        flash[:warning] = friend_request.errors
+        flash[:warning] = friend_request.errors.full_messages.to_sentence
       end
     else
       flash[:warning] = "Could not find a user with that username!"
     end
+
     redirect_to user_friends_path(current_user)
   end
 
@@ -54,8 +56,9 @@ class FriendshipsController < ApplicationController
   end
 
   private
+
   def sanitize_status_param
-    #Ensures that a friend request is not sent if two users are already friends or a friend request exists between them
+    #Ensures that the status param used in the update controller is an option
     params.require(:status)
     unless %w[accepted declined cancelled].include? params[:status]
       flash[:warning] = "That is not a valid command!"

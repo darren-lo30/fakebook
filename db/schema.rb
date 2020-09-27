@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(version: 2020_09_11_000229) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.bigint "poster_id"
+    t.bigint "author_id"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["poster_id"], name: "index_posts_on_poster_id"
+    t.index ["author_id"], name: "index_posts_on_author_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -61,5 +61,5 @@ ActiveRecord::Schema.define(version: 2020_09_11_000229) do
   add_foreign_key "friend_requests", "users", column: "requester_id"
   add_foreign_key "friendships", "users"
   add_foreign_key "friendships", "users", column: "friend_id"
-  add_foreign_key "posts", "users", column: "poster_id"
+  add_foreign_key "posts", "users", column: "author_id"
 end
