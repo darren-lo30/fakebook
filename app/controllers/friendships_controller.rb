@@ -37,9 +37,7 @@ class FriendshipsController < ApplicationController
       #Create the friendship and delete the request
       current_user.inverse_friendships.create(user_id: friend.id)
       flash[:success] = flash_message
-    elsif params[:status] == "declined"
-      flash[:danger] = flash_message
-    elsif params[:status] == "cancelled"
+    elsif params[:status] == "declined" || params[:status] == "cancelled"
       flash[:danger] = flash_message
     end
     

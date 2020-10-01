@@ -1,0 +1,19 @@
+
+<button type="button" class="post-button" data-toggle="modal" data-target="#postModal">What is on your mind...</button>
+<div class="modal fade" id="postModal" tabIndex ="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <h4>Make A Post</h4>
+            </div>
+            <div class="modal-body">
+                <%= form_with model: @post do |f| %>
+                    <div class="form-group">
+                        <%= f.text_area :body, placeholder: "Write something!", required: true, class: "form-control post-input-body" %>
+                    </div>
+                    <%= f.submit "Post", class: "btn btn-primary" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

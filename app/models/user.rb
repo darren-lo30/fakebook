@@ -18,7 +18,7 @@ class User < ApplicationRecord
   has_many :friend_requested_friends, through: :inverse_friendships, source: :user
   
   #Posts
-  has_many :posts, foreign_key: :poster_id
+  has_many :posts, foreign_key: :author_id
 
   #Friend requests
   has_many :sent_friend_requests, foreign_key: :requester_id, class_name: "FriendRequest", dependent: :destroy

@@ -49,3 +49,27 @@ body {
 .alert-notice {
     @extend .alert-success
 }
+
+.post-button {
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1.25rem;
+    font-size: 1.25rem;
+    border-radius: 500px;
+    color: rgb(70, 70, 70);
+    background-color: rgb(209, 209, 209);
+    border: 0;
+}
+
+.post-button:hover {
+    background-color: rgb(187, 187, 187);
+}
+
+.post-button:focus {
+    border: 0;
+    outline: 0;
+}
+
+.post-input-body {
+    height: 300px !important;
+}
