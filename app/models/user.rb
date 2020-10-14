@@ -27,7 +27,15 @@ class User < ApplicationRecord
   has_many :outgoing_requested_friends, through: :sent_friend_requests, source: :requestee
   has_many :incoming_requested_friends, through: :received_friend_requests, source: :requester
 
+  #Likes
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
+
   def friends
     user_requested_friends + friend_requested_friends
+  end
+
+  def get_like(post_id)
+    return likes.find_by(post_id: post_id)
   end
 end

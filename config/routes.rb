@@ -5,14 +5,16 @@ Rails.application.routes.draw do
     #Rename friendship index to something more understandable to humans
     get '/friends', to: 'friendships#index'
     resources :friendships, only: [:destroy, :index, :create, :new]
-    resources :friendships, only: [:update], param: :friend_request_id
+    resources :friendships, only: :update, param: :friend_request_id
 
     #View all posts a user has posted
-    resources :posts, only: [:index]
+    resources :posts, only: :index
   end
 
-  resources :posts, except: [:index]
-  resources :home, only: [:index]
+  resources :posts, except: :index
+  
+  resources :likes, only: [:create, :destroy]
+  resources :home, only: :index
 
   root "home#index"
 end

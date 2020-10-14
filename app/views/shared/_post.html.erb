@@ -1,6 +1,21 @@
 <div class="card my-3">
     <div class="card-body">
-        <h5 class="card-title"><%= post.author.username %></h5>
+        <h5 class="card-title"><%= post.author.first_name + " " + post.author.last_name %></h5>
         <p class="card-text"><%= post.body %></p>
+    </div>
+    <div class="card-footer">
+        <nav class="nav">
+            <span id=<%="like_#{post.id}"%>>
+                <% unless current_user.get_like(post.id) %>
+                    <%= link_to likes_path(post_id: post.id), method: :post, remote: true, class: "text-dark" do %>
+                        <i class="far fa-heart"></i>
+                    <% end %>
+                <% else %>  
+                    <%= link_to like_path(current_user.get_like(post.id).id, post_id: post.id), method: :delete, remote: true, class: "text-danger" do %>
+                        <i class="far fa-heart"></i>
+                    <% end %>
+                <% end %>
+            </span>
+        </nav>
     </div>
 </div>

@@ -1,0 +1,2 @@
+var like_button =  '<%= link_to likes_path(post_id: @post_id), method: :post, remote: true, class: "text-dark" do %><i class="far fa-heart"></i><% end %>'
+$("#like_<%= @post_id %>").empty().append(like_button)

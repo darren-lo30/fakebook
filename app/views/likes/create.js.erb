@@ -1,0 +1,2 @@
+var unlike_button = '<%= link_to like_path(@like_id, post_id: @post_id), method: :delete, remote: true, class: "text-danger" do %><i class="far fa-heart"></i><% end %>'
+$("#like_<%= @post_id %>").empty().append(unlike_button)
