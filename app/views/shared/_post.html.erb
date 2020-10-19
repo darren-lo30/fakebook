@@ -4,18 +4,29 @@
         <p class="card-text"><%= post.body %></p>
     </div>
     <div class="card-footer">
-        <nav class="nav">
-            <span id=<%="like_#{post.id}"%>>
-                <% unless current_user.get_like(post.id) %>
-                    <%= link_to likes_path(post_id: post.id), method: :post, remote: true, class: "text-dark" do %>
-                        <i class="far fa-heart"></i>
-                    <% end %>
+        <ul class="nav justify-content-center">
+            <li class="card-link" id=<%="like_#{post.id}"%>>
+                <% unless current_user.get_like_on_post(post.id) %>
+                    <%= link_to likes_path(post_id: post.id), method: :post, remote: true, class: "text-dark icon" do %><i class="far fa-heart"></i><% end %>
                 <% else %>  
-                    <%= link_to like_path(current_user.get_like(post.id).id, post_id: post.id), method: :delete, remote: true, class: "text-danger" do %>
+                    <%= link_to like_path(current_user.get_like_on_post(post.id).id, post_id: post.id), method: :delete, remote: true, class: "text-danger icon" do %>
                         <i class="far fa-heart"></i>
                     <% end %>
                 <% end %>
-            </span>
+                <span><%= post.likes.size %></span>
+            </li>
+            <% if post.author == current_user %>
+                <li class="card-link">
+                    <%= link_to edit_post_path(post), class: "text-dark icon" do %>
+                        <i class="fas fa-edit"></i>
+                    <% end %>
+                </li>
+                <li class="card-link">
+                    <%= link_to post_path(post), method: :delete, class: "text-dark icon", data: {confirm: "Are you sure you want to delete this post?"} do %>
+                        <i class="fas fa-trash"></i>
+                    <% end %>
+                </li>
+            <% end %>
         </nav>
     </div>
 </div>

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :posts, only: :index
   end
 
-  resources :posts, except: :index
+  resources :posts, except: [:index, :new]
   
   resources :likes, only: [:create, :destroy]
   resources :home, only: :index

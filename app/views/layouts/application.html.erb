@@ -23,7 +23,7 @@
                             <li>
                                 <%= link_to user_friends_path(current_user), class: "btn" do %>
                                     Friends
-                                    <span class="badge badge-pill badge-secondary"><%= current_user.received_friend_requests.count %></span>
+                                    <span class="badge badge-pill badge-secondary"><%= current_user.received_friend_requests.size %></span>
                                 <% end %>
                             </li>
                             <li><%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn" %></li>

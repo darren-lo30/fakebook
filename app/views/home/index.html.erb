@@ -13,12 +13,7 @@
                 <h4>Make A Post</h4>
             </div>
             <div class="modal-body">
-                <%= form_with model: @post do |f| %>
-                    <div class="form-group">
-                        <%= f.text_area :body, placeholder: "Write something!", required: true, class: "form-control post-input-body" %>
-                    </div>
-                    <%= f.submit "Post", class: "btn btn-primary" %>
-                <% end %>
+                <%= render partial: "posts/form", locals: {submit_text: "Post"} %>               
             </div>
         </div>
     </div>

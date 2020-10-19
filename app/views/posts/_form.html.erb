@@ -1,0 +1,6 @@
+ <%= form_with model: @post do |f| %>
+    <div class="form-group">
+        <%= f.text_area :body, placeholder: "Write something!", required: true, class: "form-control post-input-body" %>
+    </div>
+    <%= f.submit submit_text, class: "btn btn-primary" %>
+<% end %>

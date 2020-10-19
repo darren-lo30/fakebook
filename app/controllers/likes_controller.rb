@@ -1,8 +1,8 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
   def create
-    @post_id = params[:post_id]
-    like = current_user.likes.build(post_id: @post_id)
+    @post = Post.find(params[:post_id])
+    like = current_user.likes.build(post_id: @post.id)
     if like.save
       @like_id = like.id
       respond_to do |format|
@@ -14,7 +14,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @post_id = params[:post_id]
+    @post = Post.find(params[:post_id])
     Like.destroy(params[:id])
     
     respond_to do |format|

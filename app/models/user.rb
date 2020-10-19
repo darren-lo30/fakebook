@@ -31,11 +31,14 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
 
+  #Comments
+  has_many :comments, foreign_key: :commenter_id, dependent: :destroy
+
   def friends
     user_requested_friends + friend_requested_friends
   end
 
-  def get_like(post_id)
+  def get_like_on_post(post_id)
     return likes.find_by(post_id: post_id)
   end
 end
