@@ -5,15 +5,15 @@
     </div>
     <div class="card-footer">
         <ul class="nav justify-content-center">
-            <li class="card-link" id=<%="like_#{post.id}"%>>
+            <li class="card-link" id=<%="like_post_#{post.id}"%>>
                 <% unless current_user.get_like_on_post(post.id) %>
-                    <%= link_to likes_path(post_id: post.id), method: :post, remote: true, class: "text-dark icon" do %><i class="far fa-heart"></i><% end %>
+                    <%= link_to post_likes_path(post), method: :post, remote: true, class: "text-dark icon" do %><i class="far fa-heart"></i><% end %>
                 <% else %>  
-                    <%= link_to like_path(current_user.get_like_on_post(post.id).id, post_id: post.id), method: :delete, remote: true, class: "text-danger icon" do %>
+                    <%= link_to like_path(current_user.get_like_on_post(post.id)), method: :delete, remote: true, class: "text-danger icon" do %>
                         <i class="far fa-heart"></i>
                     <% end %>
                 <% end %>
-                <span><%= post.likes.size %></span>
+                <span><%= number_to_abbreviated_string(post.likes.size) %></span>
             </li>
             <% if post.author == current_user %>
                 <li class="card-link">
@@ -27,6 +27,11 @@
                     <% end %>
                 </li>
             <% end %>
+            <li class="card-link">
+                <%= link_to post_path(post), class: "text-dark icon" do %>
+                    <i class="fas fa-link"></i>
+                <% end %>
+            </li>
         </nav>
     </div>
 </div>

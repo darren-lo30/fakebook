@@ -1,10 +1,10 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_parent, only: :create
+
   def create
-    @post = Post.find(params[:post_id])
-    like = current_user.likes.build(post_id: @post.id)
-    if like.save
-      @like_id = like.id
+    @like = @parent.likes.build(user_id: current_user.id)
+    if @like.save
       respond_to do |format|
         format.js
       end
@@ -14,13 +14,13 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
-    Like.destroy(params[:id])
-    
+    like = Like.find(params[:id])
+    @parent = like.likeable
+    like.destroy
+
     respond_to do |format|
       format.js
     end
   end
-  
 
 end

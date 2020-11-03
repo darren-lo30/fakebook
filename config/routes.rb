@@ -11,9 +11,19 @@ Rails.application.routes.draw do
     resources :posts, only: :index
   end
 
-  resources :posts, except: [:index, :new]
+  #Routes for comments
+  resources :posts, except: [:index, :new], shallow: true do
+    resources :comments
+  end
   
-  resources :likes, only: [:create, :destroy]
+  #Routes for like model
+  resources :posts, :comments do 
+    resources :likes, only: :create
+  end
+  resources :likes, only: :destroy
+
+
+  #Root for home page
   resources :home, only: :index
 
   root "home#index"

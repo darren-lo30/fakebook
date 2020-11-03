@@ -38,7 +38,8 @@ class User < ApplicationRecord
     user_requested_friends + friend_requested_friends
   end
 
+
   def get_like_on_post(post_id)
-    return likes.find_by(post_id: post_id)
+    return likes.find_by(likeable_id: post_id, likeable_type: "Post")
   end
 end

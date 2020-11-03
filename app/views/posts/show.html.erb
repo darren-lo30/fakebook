@@ -1,0 +1,36 @@
+<div class="card my-3">
+    <div class="card-body">
+        <h5 class="card-title"><%= @post.author.first_name + " " + @post.author.last_name %></h5>
+        <p class="card-text"><%= @post.body %></p>
+    </div>
+
+    <div class="card-footer">
+        <div class="text-right"><%= @post.comments.size() %> comments</div>
+        <hr>
+        <div class="d-flex justify-content-around" role="group">
+            <li class="card-link btn" id=<%="like_post_#{@post.id}"%>>
+                <% unless current_user.get_like_on_post(@post.id) %>
+                    <%= link_to post_likes_path(@post), method: :post, remote: true, class: "text-dark icon" do %>
+                        <i class="far fa-heart"></i>
+                    <% end %>
+                <% else %>  
+                    <%= link_to like_path(current_user.get_like_on_post(@post.id)), method: :delete, remote: true, class: "text-danger icon" do %>
+                        <i class="far fa-heart"></i>
+                    <% end %>
+                <% end %>
+                <span><%= number_to_abbreviated_string(@post.likes.size) %></span>
+            </li>
+            <button class="card-link btn" id="comment-input-button">
+                <i class="far fa-comment"></i>
+                Comment
+            </button>
+            <li class="card-link btn">
+                Share
+            </li>
+        </div>
+        <hr>
+        <%= form_with model: @comment do |f| %>
+            <%= f.text_area :body, placeholder: "Say something...", class: "form-control", id: "comment-input" %>
+        <% end %>
+    </div>
+</div>
