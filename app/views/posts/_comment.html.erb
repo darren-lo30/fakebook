@@ -1,0 +1,12 @@
+<div class="media">
+    <span class="mr-3">
+
+        <%= user_profile_picture(comment.commenter.id, 50, 50) %>
+    </span>
+    <div class="media-body">
+        <h5 class="mt-0">
+            <%= comment.commenter.username %>
+        </h5>
+        <p><%= comment.body %></p>
+    </div>
+</div>

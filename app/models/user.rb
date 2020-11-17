@@ -34,12 +34,18 @@ class User < ApplicationRecord
   #Comments
   has_many :comments, foreign_key: :commenter_id, dependent: :destroy
 
+  #Profile picture
+  has_one_attached :profile_picture
+
   def friends
     user_requested_friends + friend_requested_friends
   end
 
-
   def get_like_on_post(post_id)
     return likes.find_by(likeable_id: post_id, likeable_type: "Post")
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end
