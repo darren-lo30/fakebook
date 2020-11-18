@@ -19,12 +19,10 @@ Rails.application.routes.draw do
     resources :friendships, only: [:destroy, :index, :create, :new]
     resources :friendships, only: :update, param: :friend_request_id
 
-    #View all posts a user has posted
-    resources :posts, only: :index
   end
 
   #Routes for comments
-  resources :posts, except: [:index, :new] do
+  resources :posts, except: :new do
     concerns :commentable
     concerns :likeable
   end
@@ -37,8 +35,5 @@ Rails.application.routes.draw do
   resources :likes, only: :destroy
   resources :comments, only: :destroy
 
-  #Root for home page
-  resources :home, only: :index
-
-  root "home#index"
+  root "posts#index"
 end

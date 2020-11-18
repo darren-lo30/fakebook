@@ -1,6 +1,20 @@
-<div class="text-center">
-    <%= user_profile_picture(current_user.id) %>
-    <h2><%= @user.full_name %></h2>
+<div class="card mb-3">
+    <div class="text-center card-body">
+        <div class="my-3">
+            <%= user_profile_picture(current_user.id, 100, 100) %>
+        </div>
+        <h2><%= @user.full_name %></h2>
+        <hr>
+        <nav class="nav justify-content-end">
+            <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link btn btn-primary" %>
+        </nav>
+    </div>
 </div>
-<div class="row justify-content-center">
+
+<div class="card-columns">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Intro</h3>
+        </div>
+    </div>
 </div>

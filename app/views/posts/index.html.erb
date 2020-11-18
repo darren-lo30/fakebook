@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="card-body">
+        <button type="button" class="post-button" data-toggle="modal" data-target="#postModal">What is on your mind...</button>
+        <hr>
+    </div>
+</div>
+
+<div class="modal fade" id="postModal" tabIndex ="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <h4>Make A Post</h4>
+            </div>
+            <div class="modal-body">
+                <%= render partial: "posts/form", locals: {submit_text: "Post"} %>               
+            </div>
+        </div>
+    </div>
+</div>
+
+<%= render partial: 'shared/post', collection: @feed_posts %>
