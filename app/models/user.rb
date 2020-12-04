@@ -37,6 +37,10 @@ class User < ApplicationRecord
   #Profile picture
   has_one_attached :profile_picture
 
+  #Omniauth
+  devise :omniauthable, omniauth_providers: %i[facebook]
+
+
   def friends
     user_requested_friends + friend_requested_friends
   end
@@ -48,4 +52,19 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
+      user.username = auth.info.email
+      
+      #Grabs the profile picture from facebook
+      image_link = auth.info.image.split('?').first
+      facebook_profile_picture = open(image_link)
+      user.profile_picture.attach(io: facebook_profile_picture, filename: 'profile-picture.jpg')
+    end
+  end
+
 end

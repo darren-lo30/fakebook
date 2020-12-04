@@ -45,6 +45,9 @@
                     </div>
 
                     <div class="actions text-center">
+                        <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-primary icon" do %>
+                            <i class="fab fa-facebook-f"></i>
+                        <% end %>
                         <%= f.submit "Sign up", class: "btn bg-main text-light"%>
                     </div>
                 <% end %>

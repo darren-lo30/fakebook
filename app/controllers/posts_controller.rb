@@ -4,8 +4,8 @@ class PostsController < ApplicationController
   before_action :verify_user_is_author, only: [:edit, :update, :destroy]
 
   def index
-    @post = current_user.posts.build
-    user_ids = current_user.friends.pluck(:id) << current_user.id
+      @post = current_user.posts.build
+      user_ids = current_user.friends.pluck(:id) << current_user.id
     @feed_posts = Post.where(author_id: user_ids)
   end
 

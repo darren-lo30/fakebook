@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    
+    @posts = @user.posts
   end
 
   private

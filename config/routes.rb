@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
 
   #Likeable concern
   concern :likeable do 
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :comments, only: [] do 
     concerns :likeable
   end
+
   
   resources :likes, only: :destroy
   resources :comments, only: :destroy
