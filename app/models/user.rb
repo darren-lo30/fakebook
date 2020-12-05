@@ -54,8 +54,9 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.uid).or(where(email: auth.info.email)).first_or_create do |user|
       user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
       user.username = auth.info.email
@@ -64,6 +65,16 @@ class User < ApplicationRecord
       image_link = auth.info.image.split('?').first
       facebook_profile_picture = open(image_link)
       user.profile_picture.attach(io: facebook_profile_picture, filename: 'profile-picture.jpg')
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"]
+        user.first_name = data["info"]["first_name"]
+        user.last_name = data["info"]["last_name"]
+        user.email = data["info"]["email"] if user.email.blank?
+      end
     end
   end
 
