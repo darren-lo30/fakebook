@@ -3,7 +3,158 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-      /* Email styles need to be inline */
+      body {
+        font-family: Arial;
+        width: 100%;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+        mso-margin-top-alt: 0px;
+        mso-margin-bottom-alt: 0px;
+        mso-padding-alt: 0px 0px 0px 0px;
+      }
+
+      p, h1, h2, h3, h4 {
+        font-family: Arial;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      span.preheader {
+        display: none;
+        font-size: 1px;
+      }
+
+      html {
+        width: 100%;
+      }
+
+      p {
+        font-size: 20px;
+        margin: 15px 0px;
+      }
+
+      .btn {
+        font-size: 14px;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        border-radius: 4px;
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+      }
+      .btn:focus,
+      .btn:active:focus {
+        outline: thin dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+      }
+      .btn:hover,
+      .btn:focus {
+        color: #333;
+        text-decoration: none;
+      }
+      .btn:active {
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+      }
+
+      /* ----------- responsivity ----------- */
+
+      @media only screen and (max-width: 640px) {
+        /*------ top header ------ */
+        .main-header {
+            font-size: 20px !important;
+        }
+        .main-section-header {
+            font-size: 28px !important;
+        }
+        .show {
+            display: block !important;
+        }
+        .hide {
+            display: none !important;
+        }
+        .align-center {
+            text-align: center !important;
+        }
+        .no-bg {
+            background: none !important;
+        }
+        /*----- main image -------*/
+        .main-image img {
+            width: 440px !important;
+            height: auto !important;
+        }
+        /* ====== divider ====== */
+        .divider img {
+            width: 440px !important;
+        }
+        /*-------- container --------*/
+        .container590 {
+            width: 440px !important;
+        }
+        .container580 {
+            width: 400px !important;
+        }
+        .main-button {
+            width: 220px !important;
+        }
+        /*-------- secions ----------*/
+        .section-img img {
+            width: 320px !important;
+            height: auto !important;
+        }
+        .team-img img {
+            width: 100% !important;
+            height: auto !important;
+        }
+      }
+
+      @media only screen and (max-width: 479px) {
+        /*------ top header ------ */
+        .main-header {
+            font-size: 18px !important;
+        }
+        .main-section-header {
+            font-size: 26px !important;
+        }
+        /* ====== divider ====== */
+        .divider img {
+            width: 280px !important;
+        }
+        /*-------- container --------*/
+        .container590 {
+            width: 280px !important;
+        }
+        .container590 {
+            width: 280px !important;
+        }
+        .container580 {
+            width: 260px !important;
+        }
+        /*-------- secions ----------*/
+        .section-img img {
+            width: 280px !important;
+            height: auto !important;
+        }
+      }
     </style>
   </head>
 

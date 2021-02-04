@@ -19,7 +19,7 @@ class PostsController < ApplicationController
       redirect_to root_path
     else
       flash[:warning] = "Unable to save"
-      rediect_to home_index_path
+      rediect_to root_path
     end
   end
 
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       flash[:success] = "Succesfully updated the post"
-      redirect_to home_index_path
+      redirect_to root_path
     else
       flash.now[:warning] = "Unable to update the post"
       render :edit
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
     @post.destroy
 
     flash[:danger] = "Deleted the post!"
-    redirect_to home_index_path
+    redirect_to root_path
   end
 
   private
@@ -57,7 +57,7 @@ class PostsController < ApplicationController
   def verify_user_is_author
     unless current_user == @post.author
       flash[:danger] = "Can not modify someone else's post!"
-      redirect_to home_index_path
+      redirect_to root_path
     end
   end
 end

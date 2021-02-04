@@ -1,0 +1,11 @@
+
+<h1 style="line-height:100px;text-align:center;">Welcome to Fakebook Darren </h1>
+<div style="margin: 0px 5rem 5rem 5rem; padding: 20px">
+    <p>Thank you for signing up with Fakebok. Don't wait to start posting!</p>
+    <p style="margin-bottom: 30px;">Visit the site now and start adding friends!</p>
+
+    <% if @temporary_password %>
+        <p>Since you signed up with facebook, your temporary password is: <%= @temporary_password %></p>
+    <% end %>
+    <%= link_to "Visit Fakebook", root_url, class: "btn", style: "color: white; background-color: #355C7D" %>
+</div>

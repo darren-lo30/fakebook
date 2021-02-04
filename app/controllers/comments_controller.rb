@@ -5,7 +5,8 @@ class CommentsController < ApplicationController
 
   def create
     comment = current_user.comments.build(comment_params)
-    comment.post_id = params[:post_id]
+    post = Post.find(params[:post_id])
+    comment.commentable = post
     
     if comment.save
       flash[:success] = "Comment posted"
@@ -13,7 +14,7 @@ class CommentsController < ApplicationController
       flash[:warning] = "Comment could not be posted"
     end
 
-    redirect_to post_path(Post.find(params[:post_id]))
+    redirect_to post_path(post)
   end
 
   def destroy
@@ -37,7 +38,7 @@ class CommentsController < ApplicationController
   def verify_user_is_author
     unless current_user == @comment.author
       flash[:danger] = "Can not modify someone else's post!"
-      redirect_to home_index_path
+      redirect_to root_path
     end
   end
 end

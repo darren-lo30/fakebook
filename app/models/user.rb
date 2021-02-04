@@ -1,12 +1,17 @@
 class User < ApplicationRecord
+  attr_accessor :temporary_password
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-
+  #Validations
   validates :first_name, :last_name, :username, presence: true
   validates :username, uniqueness: true
+
+  #Call backs
+  after_create :deliver_welcome_email
 
   #Setting up friend relations
   #Friends where the user requested to be friends with
@@ -18,7 +23,7 @@ class User < ApplicationRecord
   has_many :friend_requested_friends, through: :inverse_friendships, source: :user
   
   #Posts
-  has_many :posts, foreign_key: :author_id
+  has_many :posts, foreign_key: :author_id, dependent: :destroy
 
   #Friend requests
   has_many :sent_friend_requests, foreign_key: :requester_id, class_name: "FriendRequest", dependent: :destroy
@@ -56,10 +61,13 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).or(where(email: auth.info.email)).first_or_create do |user|
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
+      user.temporary_password = Devise.friendly_token[0, 20]
+      user.password = user.temporary_password
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
       user.username = auth.info.email
+      user.provider = auth.provider
+      user.uid = auth.uid
       
       #Grabs the profile picture from facebook
       image_link = auth.info.image.split('?').first
@@ -71,11 +79,15 @@ class User < ApplicationRecord
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"]
-        user.first_name = data["info"]["first_name"]
-        user.last_name = data["info"]["last_name"]
+        user.first_name = data["info"]["first_name"] if user.first_name.blank?
+        user.last_name = data["info"]["last_name"] if user.last_name.blank?
         user.email = data["info"]["email"] if user.email.blank?
       end
     end
+  end
+
+  def deliver_welcome_email
+    UserMailer.with(user: self, temporary_password: temporary_password).welcome_email.deliver_now
   end
 
 end
