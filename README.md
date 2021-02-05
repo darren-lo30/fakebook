@@ -1,7 +1,7 @@
 # Fakebook
 
-Using all my RoR knowledge, HTML, and CSS knowledge to make a nice looking facebook clone called Fakebook\
-Final RoR project for ToP\
+Using all my RoR knowledge, HTML, and CSS knowledge to make a nice looking facebook clone called Fakebook
+Final RoR project for ToP
 
 Will Include:
 * Posts
