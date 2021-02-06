@@ -13,7 +13,7 @@
                 <hr class="my-4">
 
                 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-                    <%= render "devise/shared/error_messages", resource: resource %>
+                    <%= render "devise/shared/error_messages", resource: resource, error_header: "Could not create an account" %>
                     <div class="form-group">
                         <%= f.label :first_name %>
                         <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
