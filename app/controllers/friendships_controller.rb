@@ -1,6 +1,8 @@
 class FriendshipsController < ApplicationController
   before_action :authenticate_user!
+  before_action :verify_user
   before_action :sanitize_status_param, only: :update
+  
 
   #Show all of the user's friends
   def index
@@ -8,6 +10,9 @@ class FriendshipsController < ApplicationController
     @friends = current_user.friends
     @pending_incoming_friends = current_user.incoming_requested_friends
     @pending_outgoing_friends = current_user.outgoing_requested_friends
+
+    @new_people = User.all.select {|u| !(u == current_user || @friends.include?(u) || 
+      @pending_incoming_friends.include?(u) || @pending_outgoing_friends.include?(u))}
   end
 
   #Send a friend request
@@ -16,7 +21,7 @@ class FriendshipsController < ApplicationController
     unless friend_to_add.nil? 
       friend_request = current_user.sent_friend_requests.build(requestee_id: friend_to_add.id)
       if friend_request.save
-        flash[:succes] = "Succesfully added @#{friend.username} as a friend!"
+        flash[:success] = "Succesfully added @#{friend_to_add.username} as a friend!"
       else
         flash[:warning] = friend_request.errors.full_messages.to_sentence
       end
@@ -54,6 +59,25 @@ class FriendshipsController < ApplicationController
   end
 
   private
+  
+  def verify_user
+    #Ensure that current user can only affect their own friend records
+
+    if params[:action] == 'destroy'
+      #Verify friendship
+      friendship = Friendship.find(params[:id])
+      redirect_to user_friends_path(current_user) if 
+        current_user.id != friendship.friend_id && current_user.id != friendship.user_id
+    elsif params[:action] == 'update'
+      friend_request = FriendRequest.find(params[:friend_request_id])
+      redirect_to user_friends_path(current_user) if 
+        current_user.id != friend_request.requester_id && current_user.id != friend_request.requestee_id
+    else
+      user = User.find_by(id: params[:user_id])
+      redirect_to user_friends_path(current_user) if !user || user != current_user
+    end
+  end
+  
 
   def sanitize_status_param
     #Ensures that the status param used in the update controller is an option

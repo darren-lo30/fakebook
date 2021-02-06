@@ -1,24 +1,24 @@
 <div class="row justify-content-center">
-  <div class="col-6">
+    <div class="col-6">
 
-    <div class="card">
-      <div class="card-body">
-        <h2 class="card-title">Recover Password</h2>
-        <hr class="my-4">
-        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource, error_header: "Could not send password reset instructions" %>
+        <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">Recover Password</h2>
+            <hr class="my-4">
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource, error_header: "Could not send password reset instructions" %>
 
-          <div class="form-group">
-            <%= f.label :email %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-          </div>
+            <div class="form-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+            </div>
 
-          <div class="actions">
-            <%= f.submit "Send me reset password instructions", class: "btn btn-primary" %>
-          </div>
-        <% end %>
-      </div>
-      
+            <div class="actions">
+                <%= f.submit "Send me reset password instructions", class: "btn btn-primary" %>
+            </div>
+            <% end %>
+        </div>
+        
+        </div>
     </div>
-  </div>
 </div>

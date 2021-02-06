@@ -26,17 +26,27 @@
                 <li class="nav-item">
                     <%= link_to "Outgoing Requests", "#pending-outgoing-friends", class: "nav-link", data: {toggle: "tab"} %>
                 </li>
+                <li class="nav-item">
+                    <%= link_to "Discover People", "#discover-people", class: "nav-link", data: {toggle: "tab"} %>
+                </li>
             </ul>
         </div>
         <div class="tab-content">
             <div class="tab-pane show active fade" id="friends">            
-                <%= render partial: "friend", collection: @friends, locals: {status: "accepted"} %>
+                <%= render partial: "friend_list", locals: 
+                    {friends: @friends, status: "accepted", empty_message: "No friends"} %>
             </div>
             <div class="tab-pane fade" id="pending-incoming-friends">
-                <%= render partial: "friend", collection: @pending_incoming_friends, locals: {status: "pending-incoming"}%>
+                <%= render partial: "friend_list", locals: 
+                    {friends: @pending_incoming_friends, status: "pending-incoming", empty_message: "No incoming friend requests"} %>
             </div>
             <div class="tab-pane fade" id="pending-outgoing-friends">
-                <%= render partial: "friend", collection: @pending_outgoing_friends, locals: {status: "pending-outgoing"} %>
+                <%= render partial: "friend_list", locals: 
+                    {friends: @pending_outgoing_friends, status: "pending-outgoing", empty_message: "No outgoing friend requests"} %>
+            </div>
+            <div class="tab-pane fade" id="discover-people">
+                <%= render partial: "friend_list", locals: 
+                    {friends: @new_people, status: "new-people", empty_message: "No new people"} %>
             </div>
         </div>
     </div>

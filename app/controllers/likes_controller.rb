@@ -22,5 +22,4 @@ class LikesController < ApplicationController
       format.js
     end
   end
-
 end

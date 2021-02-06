@@ -13,9 +13,11 @@
         <% elsif status == "pending-outgoing" %>
             <%= link_to "Cancel", friendship_path(FriendRequest.find_by(requester_id: current_user.id, requestee_id: friend.id), status: :cancelled), 
                         method: :patch, class: "btn btn-danger" %>
+        <% elsif status == "new-people" %>
+            <%= link_to "Add", user_friendships_path(current_user, friend_username: friend.username), method: :post, class: "btn btn-success" %>
         <% else %>
             <%= link_to "View Profile", user_path(friend), class: "btn btn-primary" %>
-            <%= link_to "Remove", friendship_path(Friendship.find_friendship(current_user, friend), friend_id: friend.id ), 
+            <%= link_to "Remove", friendship_path(Friendship.find_friendship(current_user, friend), friend_id: friend.id), 
                         method: :delete, class: "btn btn-danger ml-1" %>
         <% end %>
     </div>

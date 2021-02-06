@@ -1,0 +1,7 @@
+<% if friends.empty? %>
+    <div class="list-group-item">
+        <%= empty_message %>
+    </div>
+<% else %>
+    <%= render partial: "friend", collection: friends, locals: {status: status} %>
+<% end %>
