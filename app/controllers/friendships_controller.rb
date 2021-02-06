@@ -21,7 +21,7 @@ class FriendshipsController < ApplicationController
     unless friend_to_add.nil? 
       friend_request = current_user.sent_friend_requests.build(requestee_id: friend_to_add.id)
       if friend_request.save
-        flash[:success] = "Succesfully added @#{friend_to_add.username} as a friend!"
+        flash[:success] = "Succesfully sent friend request to @#{friend_to_add.username}!"
       else
         flash[:warning] = friend_request.errors.full_messages.to_sentence
       end
