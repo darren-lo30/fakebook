@@ -5,20 +5,20 @@
             <h3><%= friend.first_name %><small class="text-muted">@<%= friend.username %></small></h3>
         </div>
         
+        <%= link_to "View Profile", user_path(friend), class: "btn btn-primary ml-1" %>
         <% if status == "pending-incoming" %>
             <%= link_to "Accept", friendship_path(FriendRequest.find_by(requester_id: friend.id, requestee_id: current_user.id), status: :accepted), 
-                        method: :patch, class: "btn btn-success"%>
+                method: :patch, class: "btn btn-success ml-1"%>
             <%= link_to "Decline", friendship_path(FriendRequest.find_by(requester_id: friend.id, requestee_id: current_user.id), status: :declined), 
-                        method: :patch, class: "btn btn-danger ml-1"%>
+                method: :patch, class: "btn btn-danger ml-1", data: {confirm: "Are you sure you want to decline this friend request?"} %>
         <% elsif status == "pending-outgoing" %>
             <%= link_to "Cancel", friendship_path(FriendRequest.find_by(requester_id: current_user.id, requestee_id: friend.id), status: :cancelled), 
-                        method: :patch, class: "btn btn-danger" %>
+                method: :patch, class: "btn btn-danger ml-1", data: {confirm: "Are you sure you want to cancel this friend request?"} %>
         <% elsif status == "new-people" %>
-            <%= link_to "Add", user_friendships_path(current_user, friend_username: friend.username), method: :post, class: "btn btn-success" %>
+            <%= link_to "Add", user_friendships_path(current_user, friend_username: friend.username), method: :post, class: "btn btn-success ml-1" %>
         <% else %>
-            <%= link_to "View Profile", user_path(friend), class: "btn btn-primary" %>
             <%= link_to "Remove", friendship_path(Friendship.find_friendship(current_user, friend), friend_id: friend.id), 
-                        method: :delete, class: "btn btn-danger ml-1" %>
+                method: :delete, class: "btn btn-danger ml-1", data: {confirm: "Are you sure you want to remove this friend?"} %>
         <% end %>
     </div>
 </div>

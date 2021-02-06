@@ -5,9 +5,12 @@
         </div>
         <h2><%= @user.full_name %></h2>
         <hr>
-        <nav class="nav justify-content-end">
-            <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link btn btn-primary" %>
-        </nav>
+
+        <% if current_user == @user %>
+            <nav class="nav justify-content-end">
+                <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link btn btn-primary" %>
+            </nav>
+        <% end %>
     </div>
 </div>
 
