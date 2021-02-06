@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     
     if comment.save
       flash[:success] = "Comment posted"
-    else
+    else  
       flash[:warning] = "Comment could not be posted"
     end
 
