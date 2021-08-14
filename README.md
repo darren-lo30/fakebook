@@ -1,11 +1,10 @@
 # Fakebook
 
-Using all my RoR knowledge, HTML, and CSS knowledge to make a nice looking facebook clone called Fakebook
-Final RoR project for ToP
+A facebook clone using Ruby on Rails. Live on heroku at: https://obscure-peak-38457.herokuapp.com/
 
-Will Include:
+Includes:
 * Posts
 * Comments
 * User authentication
-* CSS frameworks
+* Omniauth
 
