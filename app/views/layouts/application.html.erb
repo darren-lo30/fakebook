@@ -9,7 +9,7 @@
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
 
-    <body class="bg-main">
+    <body class="bg-main min-vh-100 d-flex flex-column">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <%= link_to "Fakebook", root_path, class: "navbar-brand"%>
@@ -40,8 +40,13 @@
                 <%= content_tag :div, msg, class: "alert alert-#{type}" %>
             <% end %>
         <% end %>
-        <div class="container main-content">
+        <div class="container main-content mb-5">
             <%= yield %>
         </div>
+        <footer class="mt-auto navbar navbar-light bg-light">
+            <div class="container">
+                <%= link_to "Privacy Policy", page_path('policy'), class: "d-block text-center w-100" %>
+            </div>
+        </footer>
     </body>
 </html>

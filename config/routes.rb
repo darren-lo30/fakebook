@@ -36,5 +36,6 @@ Rails.application.routes.draw do
   resources :likes, only: :destroy
   resources :comments, only: :destroy
 
+  get '/:page', to: 'pages#show', as: 'page'
   root "posts#index"
 end
